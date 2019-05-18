@@ -15,13 +15,14 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
     // cell reuse id (cells that scroll out of view can be reused)
     let cellReuseIdentifier = "cell"
     
+    var allData = [Student]()
+    
     //задаем заголовок таблицы
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Список студентов"
     }
     
-    var allData = [Student]()
-    
+    //задаем кол-во строк в таблице вычисляя кол-во элементов в массиве allData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.allData.count
     }
@@ -33,11 +34,12 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
         let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! UITableViewCell!
         
         // set the text from the data model
-        let fullName = self.allData[indexPath.row].name + self.allData[indexPath.row].soname
+        //let fullName = self.allData[indexPath.row].name + " " + self.allData[indexPath.row].soname
+        let fullName = self.allData[indexPath.row].fullName
         
         let score = String(self.allData[indexPath.row].score)
         
-        cell.textLabel?.text = "\(fullName)"
+        cell.textLabel?.text = "\(fullName!)"
         cell.detailTextLabel?.text = "\(score)"
         
         return cell
@@ -50,7 +52,7 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)//главный сториборд
         
         let EditStudentViewController = mainStoryboard.instantiateViewController(withIdentifier: "EditStudentViewController")//View в который нужен переход
-        
+        // ну и сам переход во view собственно
         self.navigationController?.pushViewController(EditStudentViewController, animated: true)
     }
     
@@ -72,9 +74,9 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
             Student(name: "Прохор", soname: "Семенов", score: "4.0"),
             Student(name: "Алина", soname: "Синичкина", score: "5.0")]
         
-        //выводим дял себя
+        //выводим для себя
         for student in allData {
-            print("Student: \(student.name!) \(student.soname!) \(student.score!)")
+            print("Student: \(student.fullName!) \(student.score!)")
         }
         
     }
