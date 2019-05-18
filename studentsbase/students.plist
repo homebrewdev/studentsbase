@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>Иван Петров</string>
+		<string>4.5</string>
+	</array>
+	<array>
+		<string>Иван Иванов</string>
+		<string>0</string>
+	</array>
+	<array>
+		<string>петр Сидоров</string>
+		<string>3.7</string>
+	</array>
+	<array>
+		<string>Алексей Сидоров</string>
+		<integer>3</integer>
+	</array>
+	<array>
+		<string>Василий Жуков</string>
+		<integer>5</integer>
+	</array>
+	<array>
+		<string>Федя Петров</string>
+		<real>4</real>
+	</array>
+</array>
+</plist>
