@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		19A8DB7C228EA80C0035A4FC /* students.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19A8DB7B228EA80C0035A4FC /* students.plist */; };
+		19A8DB8022911D050035A4FC /* StudentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A8DB7F22911D050035A4FC /* StudentsTableViewCell.swift */; };
 		19F94D82228DBD1400854A8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F94D81228DBD1400854A8E /* AppDelegate.swift */; };
 		19F94D87228DBD1400854A8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19F94D85228DBD1400854A8E /* Main.storyboard */; };
 		19F94D89228DBD1600854A8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19F94D88228DBD1600854A8E /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		19A8DB7B228EA80C0035A4FC /* students.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = students.plist; sourceTree = "<group>"; };
+		19A8DB7F22911D050035A4FC /* StudentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsTableViewCell.swift; sourceTree = "<group>"; };
 		19F94D7E228DBD1400854A8E /* studentsbase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = studentsbase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19F94D81228DBD1400854A8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19F94D86228DBD1400854A8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				19F94D8A228DBD1600854A8E /* LaunchScreen.storyboard */,
 				19F94D8D228DBD1600854A8E /* Info.plist */,
 				19A8DB7B228EA80C0035A4FC /* students.plist */,
+				19A8DB7F22911D050035A4FC /* StudentsTableViewCell.swift */,
 			);
 			path = studentsbase;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 			files = (
 				19F94DB4228DC1BD00854A8E /* StudentsViewController.swift in Sources */,
 				19F94DB8228DC29A00854A8E /* EditStudentViewController.swift in Sources */,
+				19A8DB8022911D050035A4FC /* StudentsTableViewCell.swift in Sources */,
 				19F94DB0228DC0D300854A8E /* Student.swift in Sources */,
 				19F94D82228DBD1400854A8E /* AppDelegate.swift in Sources */,
 			);

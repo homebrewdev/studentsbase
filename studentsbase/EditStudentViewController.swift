@@ -11,20 +11,30 @@ import UIKit
 class EditStudentViewController: UIViewController {
     
     @IBOutlet weak var textName: UITextField!
-    @IBOutlet weak var textScore: UITextField!
     @IBOutlet weak var textSoname: UITextField!
+    @IBOutlet weak var textScore: UITextField!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //let student = modelController.student
-        //textName.text = student.name
-        //textScore.text = String(student.score!)
+        
+    }
+    
+    // передаем данные из этого View в главный контроллер StudentsViewController
+    // и добавляем в массив нового студента Student
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // получаем View Controller, который является конечным пунктом для segue
+        let destinationVC = segue.destination as! StudentsViewController
+        // изменяем свойство, используемое для установки текста в label
+        //destinationVC.textOfLabel = (textfield?.text)!
+        destinationVC.allData.append(Student(name: textName.text!,
+                                             soname: textSoname.text!,
+                                             score: textScore.text!))
     }
     
     // при нажатии на кнопку Сохранить будет происходить валидация полей
     // передача заполненных полей в главный View
-    // и переход обратно на главный экран с таблицей студентов
+    // а также переход обратно на главный экран с таблицей студентов
     @IBAction func saveStudent(_ sender: Any) {
         
         func showAlert(title: String, message: String) {
@@ -35,7 +45,6 @@ class EditStudentViewController: UIViewController {
                 preferredStyle: .alert)
             // создаем объекты типа UIAlertAction, описывающие кнопки
             let alertButtonOne = UIAlertAction(title: "ОК", style: .default, handler: nil)
-            //let alertButtonTwo = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
             // добавляем созданные кнопки в модальное окно
             alertController.addAction(alertButtonOne)
             //alertController.addAction(alertButtonTwo)
@@ -89,8 +98,15 @@ class EditStudentViewController: UIViewController {
             }
         }
         
+        if validation() {
+            //prepare(for: UIStoryboardSegue, sender: EditStudentViewController.self)
+        }
         // инициируем проверку правильности заполнения полей EditStudentsView
-        var isValidate = validation()
+        // и если все окей validation() возвращает true -> переходим в главный RootViewController
+        //let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)//главный сториборд
+        //mainStoryboard.instantiateInitialViewController()
+        //if validation() {
+        //}
         
     }
     

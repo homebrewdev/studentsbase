@@ -13,12 +13,42 @@
         <!--База данных студентов-->
         <scene sceneID="wZH-ft-6FX">
             <objects>
-                <tableViewController id="1iF-Zo-r4h" customClass="StudentsViewController" customModule="studentsbase" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="B1W-gI-tsY" customClass="tableView" customModule="studentbase">
+                <tableViewController storyboardIdentifier="MainController" id="1iF-Zo-r4h" customClass="StudentsViewController" customModule="studentsbase" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="B1W-gI-tsY" customClass="tableView" customModule="studentbase">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="separatorColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="qwY-hO-gTS" detailTextLabel="l9Z-Sb-tWh" style="IBUITableViewCellStyleValue1" id="HTL-71-TCi" customClass="StudentsTableViewCell" customModule="studentsbase">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HTL-71-TCi" id="bCG-mL-DnS">
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qwY-hO-gTS">
+                                            <rect key="frame" x="16" y="12" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l9Z-Sb-tWh">
+                                            <rect key="frame" x="296" y="12" width="44" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailLabel" destination="l9Z-Sb-tWh" id="K6V-g7-w4J"/>
+                                    <outlet property="titleLabel" destination="qwY-hO-gTS" id="qyb-cS-iu5"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="1iF-Zo-r4h" id="Vcm-dC-B8F"/>
@@ -28,7 +58,7 @@
                     <navigationItem key="navigationItem" title="База данных студентов" id="ODL-fG-ja8">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="pGr-JN-fZY">
                             <connections>
-                                <segue destination="yVa-01-jl9" kind="show" id="8aw-Ql-MpI"/>
+                                <segue destination="yVa-01-jl9" kind="show" identifier="EditStudentSegue" id="8aw-Ql-MpI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -65,11 +95,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bD6-gz-lTL">
-                                <rect key="frame" x="167" y="93" width="188" height="30"/>
+                                <rect key="frame" x="167" y="151" width="188" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c4L-8y-W59">
                                 <rect key="frame" x="167" y="212" width="90" height="30"/>
@@ -99,42 +129,34 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G0e-9S-ujE">
-                                <rect key="frame" x="167" y="151" width="188" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBl-13-n6x">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBl-13-n6x">
                                 <rect key="frame" x="102" y="318" width="77" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="6nO-2t-KUo"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="77" id="BTf-LW-1jx"/>
-                                    <constraint firstAttribute="width" constant="77" id="aaY-Ay-yHT"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="fJ4-Q6-XiB"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Сохранить"/>
                                 <connections>
-                                    <action selector="saveNewStudent:" destination="yVa-01-jl9" eventType="touchUpInside" id="q4v-ce-X6P"/>
+                                    <action selector="saveStudent:" destination="yVa-01-jl9" eventType="touchUpInside" id="71T-cb-sdR"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7md-ee-sVi">
                                 <rect key="frame" x="219" y="318" width="56" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Отмена"/>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G0e-9S-ujE">
+                                <rect key="frame" x="167" y="94" width="188" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" textContentType="family-name"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="dBl-13-n6x" firstAttribute="centerX" secondItem="CrD-85-aIy" secondAttribute="centerX" id="dHK-xo-EdB"/>
-                            <constraint firstItem="dBl-13-n6x" firstAttribute="centerY" secondItem="CrD-85-aIy" secondAttribute="centerY" id="fge-hV-aOR"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="bHF-n5-gvD"/>
                     </view>
                     <connections>
                         <outlet property="textName" destination="bD6-gz-lTL" id="seH-Yf-jcV"/>
                         <outlet property="textScore" destination="c4L-8y-W59" id="ibf-H7-2mL"/>
+                        <outlet property="textSoname" destination="G0e-9S-ujE" id="JF2-8F-JtB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a8g-fL-6u7" userLabel="First Responder" sceneMemberID="firstResponder"/>
