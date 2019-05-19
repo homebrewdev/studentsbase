@@ -2,7 +2,7 @@
 //  StudentsTableViewCell.swift
 //  studentsbase
 //
-//  Created by tiger on 19.05.2019.
+//  Created by Egor Devyatov on 19.05.2019.
 //  Copyright © 2019 homework. All rights reserved.
 //
 

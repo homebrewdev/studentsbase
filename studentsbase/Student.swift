@@ -2,7 +2,7 @@
 //  student.swift
 //  studentsbase
 //
-//  Created by tiger on 16.05.2019.
+//  Created by Egor Devyatov on 16.05.2019.
 //  Copyright © 2019 homework. All rights reserved.
 //
 
@@ -10,9 +10,10 @@ import Foundation
 
 // класс Студент
 // поля:
-//      name    - имя студента
-//      soname  - фамилия
-//      score   - средний балл
+//      name        - имя студента
+//      soname      - фамилия
+//      fullName    - автополе Фамилия + пробел + имя
+//      score       - средний балл
 class Student {
     var name: String!
     var soname: String!

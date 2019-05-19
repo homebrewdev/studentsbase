@@ -2,7 +2,7 @@
 //  StudentsViewController.swift
 //  studentsbase
 //
-//  Created by tiger on 16.05.2019.
+//  Created by Egor Devyatov on 16.05.2019.
 //  Copyright © 2019 homework. All rights reserved.
 //
 
@@ -10,12 +10,12 @@ import UIKit
 
 class StudentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
     @IBOutlet weak var tableView: UITableView!
     
-    // cell reuse id (cells that scroll out of view can be reused)
+    // идентификатор ячейки таблицы
     let cellReuseIdentifier = "cell"
     
+    // инициализируем массив из экземляров класса Student
     var allData = [Student]()
     
     //задаем заголовок таблицы
@@ -28,21 +28,19 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
         return self.allData.count
     }
     
-    // create a cell for each table view row
+    // создаем параметры ячейки таблицы
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //устанавливаем название идентификатора ячейки
         let reuseIdentifier = "cell"
         
         var cell:UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as UITableViewCell?
         if (cell == nil) {
-            cell = UITableViewCell(style: UITableViewCell.CellStyle.value2, reuseIdentifier: reuseIdentifier)
+            cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: reuseIdentifier)
         }
+        //уставналиваем AccessoryType
+        cell!.accessoryType = UITableViewCell.AccessoryType(rawValue: 1)!
         
-        cell!.accessoryType = UITableViewCell.AccessoryType(rawValue: 2)!
-        
-        // create a new cell if needed or reuse an old one
-        //let cell:StudentsTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! UITableViewCell
-        
-        // set the text from the data mode
+        // заполняем поля ячейки таблицы данными из массива студенов
         let fullName = self.allData[indexPath.row].fullName + "      "
             + self.allData[indexPath.row].score
         
@@ -54,20 +52,18 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
         return cell!
     }
     
-    // method to run when table view cell is tapped
+    // метод вызываемый по нажатию на ячейку таблицы UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You tapped cell number \(indexPath.row)")
+        print("Нажата ячейка номер: \(indexPath.row)")
         
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)//главный сториборд
-
-        let EditStudentViewController = mainStoryboard.instantiateViewController(withIdentifier: "EditStudentViewController")//View в который нужен переход
+        //View в который нужен переход
+        let EditStudentViewController = mainStoryboard.instantiateViewController(withIdentifier: "EditStudentViewController")
         // ну и сам переход во view собственно
         self.navigationController?.pushViewController(EditStudentViewController, animated: true)
-        
-        //prepare(for: UIStoryboard.Se, sender: Any?.self)
     }
     
-    // название кнопки "удалить" при удалении строки таблицы
+    // задаем название кнопки "удалить" при удалении строки таблицы
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "Удалить"
     }
@@ -97,28 +93,31 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         tableView.delegate = self
         tableView.dataSource = self
+    
         
+        // читаем данные из students.plist
+        func readPlist(){
+            let path = Bundle.main.path(forResource: "students", ofType: "plist")
+            let rootArray = NSArray(contentsOfFile: path!)!
+            print(rootArray.count) //выдает общее количество записей студент
         
-        //массив из объектов типа Student массив данных по студентам
-        allData += [
-            Student(name: "Иван", soname: "Иванов", score: "5.0"),
-            Student(name: "Петя", soname: "Петров", score: "4.5"),
-            Student(name: "Алексей", soname: "Сидоров", score: "4.2"),
-            Student(name: "Прохор", soname: "Семенов", score: "4.0"),
-            Student(name: "Алина", soname: "Синичкина", score: "5.0"),
-            Student(name: "Ольга", soname: "Грозных", score: "3.4"),
-            Student(name: "Муганга", soname: "Мзумбу", score: "4.7"),
-            Student(name: "Ашот", soname: "Абакунян", score: "3.9"),
-            Student(name: "Гаврила", soname: "Безымянный", score: "3.6"),
-            Student(name: "Федор", soname: "Прохоров", score: "4.1"),
-            Student(name: "Кристина", soname: "Звездина", score: "5.0"),
-            Student(name: "Оксана", soname: "Шадрина", score: "4.3"),
-        ]
+            for data in rootArray {
+                let subArray = data as? NSArray ?? []
+                for value in subArray {
+                    print("objects are \(value)")//выводит содержимое каждого студента
+                }
+                // добавляем каждую запись типа Item из массива String полей
+                allData.append(Student(name: subArray[0] as! String, soname: subArray[1] as! String, score: subArray[2] as! String))
+            }
+            
+            //выводим для себя в консоль
+            for student in allData {
+                print("Student: \(student.fullName!) \(student.score!)")
+            }
         
-        //выводим для себя в консоль
-        for student in allData {
-            print("Student: \(student.fullName!) \(student.score!)")
         }
+        
+        readPlist()
         
         // передаем данные из этого View в главный контроллер StudentsViewController
         // и добавляем в массив нового студента Student
@@ -137,7 +136,7 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // тут будет код котрый исполняется при возобновлении показа главной view
+        // тут будет код который исполняется при возобновлении показа главной view
         }
         
 }

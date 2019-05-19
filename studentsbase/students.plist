@@ -3,28 +3,59 @@
 <plist version="1.0">
 <array>
 	<array>
-		<string>Иван Петров</string>
+		<string>Петров</string>
+		<string>Федор</string>
 		<string>4.5</string>
 	</array>
 	<array>
-		<string>Иван Иванов</string>
-		<string>0</string>
+		<string>Петров</string>
+		<string>Иван</string>
+		<string>4.5</string>
 	</array>
 	<array>
-		<string>петр Сидоров</string>
+		<string>Иванов</string>
+		<string>Сергей</string>
+		<string>4.2</string>
+	</array>
+	<array>
+		<string>Сидоров</string>
+		<string>Петр</string>
 		<string>3.7</string>
 	</array>
 	<array>
-		<string>Алексей Сидоров</string>
-		<integer>3</integer>
+		<string>Сидоров</string>
+		<string>Алексей</string>
+		<string>3.0</string>
 	</array>
 	<array>
-		<string>Василий Жуков</string>
-		<integer>5</integer>
+		<string>Жуков</string>
+		<string>Василий</string>
+		<string>5.0</string>
 	</array>
 	<array>
-		<string>Федя Петров</string>
-		<real>4</real>
+		<string>Синичкина</string>
+		<string>Алина</string>
+		<string>4.5</string>
+	</array>
+	<array>
+		<string>Грозных</string>
+		<string>Ольга</string>
+		<string>4.7</string>
+	</array>
+	<array>
+		<string>Муганга</string>
+		<string>Мзумбу</string>
+		<string>3.5</string>
+	</array>
+	<array>
+		<string>Каспарян</string>
+		<string>Ашот</string>
+		<string>4.1</string>
+	</array>
+	<array>
+		<string>Звездина</string>
+		<string>Кристина</string>
+		<string>5.0</string>
 	</array>
 </array>
 </plist>
