@@ -9,6 +9,7 @@
 import UIKit
 
 class StudentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -20,7 +21,7 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     //задаем заголовок таблицы
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Список студентов"
+        return "Список студентов               Средний балл"
     }
     
     //задаем кол-во строк в таблице вычисляя кол-во элементов в массиве allData
@@ -41,26 +42,37 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
         cell!.accessoryType = UITableViewCell.AccessoryType(rawValue: 1)!
         
         // заполняем поля ячейки таблицы данными из массива студенов
-        let fullName = self.allData[indexPath.row].fullName + "      "
-            + self.allData[indexPath.row].score
+        let fullName = self.allData[indexPath.row].fullName
         
-        let score = String(self.allData[indexPath.row].score)
+        let score = self.allData[indexPath.row].score
         
-        cell!.textLabel?.text = "\(fullName)"
-        cell!.detailTextLabel?.text = "\(score)"
+        cell!.textLabel?.text = "\(fullName!)"
+        cell!.detailTextLabel?.text = "\(score ?? "0.0")"
         
         return cell!
     }
+    
     
     // метод вызываемый по нажатию на ячейку таблицы UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Нажата ячейка номер: \(indexPath.row)")
         
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)//главный сториборд
+        //let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)//главный сториборд
+        
         //View в который нужен переход
-        let EditStudentViewController = mainStoryboard.instantiateViewController(withIdentifier: "EditStudentViewController")
+        let dest = storyboard?.instantiateViewController(withIdentifier: "EditStudentViewController") as! EditStudentViewController
+    
+        let name: String = self.allData[indexPath.row].name!
+        let soname: String = self.allData[indexPath.row].soname!
+        
+        let score: String = self.allData[indexPath.row].score!
+        
+        //dest.textName.insertText("text")
+        //dest.textSoname.insertText("text")
+        //dest.textScore.insertText("text")
+        
         // ну и сам переход во view собственно
-        self.navigationController?.pushViewController(EditStudentViewController, animated: true)
+        self.navigationController?.pushViewController(dest, animated: true)
     }
     
     // задаем название кнопки "удалить" при удалении строки таблицы
@@ -82,41 +94,46 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
         } else if editingStyle == .insert {
             // Not used in our example, but if you were adding a new row, this is where you would do it.
         }
-    
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // регистрируем xib файл с дизайном ячейки таблицы
+        let xib = UINib(nibName: "xibCell", bundle: Bundle.main)
+        tableView?.register(xib, forCellReuseIdentifier: "xibCell")
+        
         // регистрируем идентификатор ячейки CellReuseIdentifier
-        tableView.register(StudentsTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(StudentsTableViewCell.self, forCellReuseIdentifier: "xibCell")
         
         tableView.delegate = self
         tableView.dataSource = self
-    
         
-        // читаем данные из students.plist
+        
+        // функция чтения данных из students.plist
         func readPlist(){
             let path = Bundle.main.path(forResource: "students", ofType: "plist")
             let rootArray = NSArray(contentsOfFile: path!)!
             print(rootArray.count) //выдает общее количество записей студент
-        
+            
             for data in rootArray {
                 let subArray = data as? NSArray ?? []
                 for value in subArray {
                     print("objects are \(value)")//выводит содержимое каждого студента
                 }
                 // добавляем каждую запись типа Item из массива String полей
-                allData.append(Student(name: subArray[0] as! String, soname: subArray[1] as! String, score: subArray[2] as! String))
+                allData.append(Student(name: subArray[1] as! String, soname: subArray[0] as! String, score: subArray[2] as! String))
             }
             
             //выводим для себя в консоль
             for student in allData {
                 print("Student: \(student.fullName!) \(student.score!)")
             }
-        
+            
         }
         
+        // читаем данные из students.plist
         readPlist()
         
         // передаем данные из этого View в главный контроллер StudentsViewController
@@ -127,9 +144,7 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
             
             destinationVC.textName.text = "редактирование"
             destinationVC.textSoname.text = "редактирование"
-            // изменяем свойство, используемое для установки текста в label
-            //destinationVC.textOfLabel = (textfield?.text)!
-        
+            
         }
         
     }
@@ -137,6 +152,6 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // тут будет код который исполняется при возобновлении показа главной view
-        }
-        
+    }
+    
 }

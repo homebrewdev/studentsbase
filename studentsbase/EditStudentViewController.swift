@@ -90,11 +90,25 @@ class EditStudentViewController: UIViewController {
     // и добавляем в массив нового студента Student
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // получаем View Controller, который является конечным пунктом для segue
-        let destinationVC = segue.destination as! StudentsViewController
+        if let destinationVC = segue.destination as? StudentsViewController {
         // добавляем в массив нового студента Students массив находится в главном view контроллере StudentsViewController
         destinationVC.allData.append(Student(name: textName.text!,
                                              soname: textSoname.text!,
                                              score: textScore.text!))
+        }
+    }
+    
+    // new sega
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if segue.identifier == "DataToMain"
+        {
+            let detailViewController = ((segue.destination) as! StudentsViewController)
+            
+            detailViewController.allData.append(Student(name: textName.text!,
+                                                        soname: textSoname.text!,
+                                                        score: textScore.text!))
+        }
     }
     
     // при нажатии на кнопку Сохранить будет происходить валидация полей
@@ -105,7 +119,8 @@ class EditStudentViewController: UIViewController {
         // если валидация проша успешно значение функции validation -> true
         // то переходим в главный RootViewController
         if validation() {
-            //prepare(for: UIStoryboardSegue, sender: EditStudentViewController.self)
+            
+            //prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
         }
         
     }
