@@ -19,6 +19,8 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
     // инициализируем массив из экземляров класса Student
     var allData = [Student]()
     
+    var student: Student = Student(name: "", soname: "", score: "")
+    
     //задаем заголовок таблицы
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Список студентов               Средний балл"
@@ -57,22 +59,22 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Нажата ячейка номер: \(indexPath.row)")
         
-        //let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)//главный сториборд
+        // заполняем из модели данных поля соответствующие нажатой ячейке с номером indexPath.row
+        student.name = self.allData[indexPath.row].name
+        student.soname = self.allData[indexPath.row].soname
+        student.score = self.allData[indexPath.row].score
         
-        //View в который нужен переход
-        let dest = storyboard?.instantiateViewController(withIdentifier: "EditStudentViewController") as! EditStudentViewController
-    
-        let name: String = self.allData[indexPath.row].name!
-        let soname: String = self.allData[indexPath.row].soname!
+        //View в который нужен переход EditStudentViewController с идентификатором
+        let destinationVC = storyboard?.instantiateViewController(withIdentifier: "EditStudentViewController") as! EditStudentViewController
         
-        let score: String = self.allData[indexPath.row].score!
-        
-        //dest.textName.insertText("text")
-        //dest.textSoname.insertText("text")
-        //dest.textScore.insertText("text")
+          // заполняем соответствующие поля в EditViewController полями
+            
+            destinationVC.student.name = student.name
+            destinationVC.student.soname = student.soname
+            destinationVC.student.score = student.score
         
         // ну и сам переход во view собственно
-        self.navigationController?.pushViewController(dest, animated: true)
+        self.navigationController?.pushViewController(destinationVC, animated: true)
     }
     
     // задаем название кнопки "удалить" при удалении строки таблицы
@@ -113,22 +115,24 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
         
         // функция чтения данных из students.plist
         func readPlist(){
+            // указываем наш students.plist
             let path = Bundle.main.path(forResource: "students", ofType: "plist")
+        
             let rootArray = NSArray(contentsOfFile: path!)!
-            print(rootArray.count) //выдает общее количество записей студент
+            //выдает общее количество записей типа студент в файле students.plist
+            print(rootArray.count)
             
             for data in rootArray {
                 let subArray = data as? NSArray ?? []
-                for value in subArray {
-                    print("objects are \(value)")//выводит содержимое каждого студента
-                }
+            
                 // добавляем каждую запись типа Item из массива String полей
+                // в нашу модель данных allData
                 allData.append(Student(name: subArray[1] as! String, soname: subArray[0] as! String, score: subArray[2] as! String))
             }
             
             //выводим для себя в консоль
             for student in allData {
-                print("Student: \(student.fullName!) \(student.score!)")
+                print("Student: \(student.fullName!) score: \(student.score!)")
             }
             
         }
@@ -136,18 +140,33 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
         // читаем данные из students.plist
         readPlist()
         
-        // передаем данные из этого View в главный контроллер StudentsViewController
-        // и добавляем в массив нового студента Student
-        func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            // получаем View Controller, который является конечным пунктом для segue
-            let destinationVC = segue.destination as! EditStudentViewController
+    }
+    
+    /*
+    // будем заполнять студента только тогда когда мы переходим от ячейки таблицы
+    
+    func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
+        //if segue!.identifier == "fromCellToEditStudent" {
+            let destinationVC: EditStudentViewController = segue!.destination as! EditStudentViewController
             
-            destinationVC.textName.text = "редактирование"
-            destinationVC.textSoname.text = "редактирование"
+            destinationVC.student.name = (student.name)
+            destinationVC.student.soname = (student.soname)
+            destinationVC.student.score = (student.score)
             
         }
+    */
+    
+    // передаем данные из этого View в главный контроллер StudentsViewController
+    // и добавляем в массив нового студента Student
+    //override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //получаем View Controller, который является конечным пунктом для segue
+      //  let destinationVC = segue.destination as! EditStudentViewController
         
-    }
+        //destinationVC.student.name = student.name
+        //destinationVC.student.soname = student.soname
+        //destinationVC.student.score = student.score
+        
+   // }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

@@ -29,7 +29,7 @@
                     <navigationItem key="navigationItem" title="База данных студентов" id="ODL-fG-ja8">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="pGr-JN-fZY">
                             <connections>
-                                <segue destination="yVa-01-jl9" kind="show" identifier="EditStudentSegue" id="8aw-Ql-MpI"/>
+                                <segue destination="yVa-01-jl9" kind="show" id="jlO-Zd-ZfH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -66,7 +66,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bD6-gz-lTL">
-                                <rect key="frame" x="175" y="224" width="180" height="30"/>
+                                <rect key="frame" x="170" y="224" width="180" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="QU2-ZK-y9u"/>
                                     <constraint firstAttribute="height" constant="30" id="aTn-VO-alR"/>
@@ -94,7 +94,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Фамилия:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pFG-md-Lfq">
-                                <rect key="frame" x="30" y="164" width="85" height="20.5"/>
+                                <rect key="frame" x="30" y="164" width="80" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -106,7 +106,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G0e-9S-ujE">
-                                <rect key="frame" x="175" y="164" width="180" height="30"/>
+                                <rect key="frame" x="170" y="164" width="180" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" textContentType="family-name"/>
@@ -124,6 +124,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="66" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Отмена"/>
+                                        <connections>
+                                            <action selector="cancelEdit:" destination="yVa-01-jl9" eventType="touchUpInside" id="s5c-W2-va9"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBl-13-n6x">
                                         <rect key="frame" x="66" y="0.0" width="184" height="50"/>

@@ -14,13 +14,27 @@ class EditStudentViewController: UIViewController {
     @IBOutlet weak var textSoname: UITextField!
     @IBOutlet weak var textScore: UITextField!
 
+    var student: Student = Student(name: "", soname: "", score: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.textName!.text = student.name
+        self.textSoname!.text = student.soname
+        self.textScore!.text = student.score
+        
     }
     
-    // метод вывода алертов при валидации полей
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+       // self.textName!.text = student.name
+      //  self.textSoname!.text = student.soname
+      //  self.textScore!.text = student.score
+        
+    }
+    
+    // метод для вывода алертов в процессе валидации полей
     func showAlert(title: String, message: String) {
         // создаем объект типа UIAlertController, описывающий модальное окно
         let alertController = UIAlertController(
@@ -36,7 +50,7 @@ class EditStudentViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    // функция проверки полей на правильность заполнения
+    // функция проверки полей на правильность заполнения (валидация)
     func validation() -> Bool {
         var alertType = 0
         var alertMessage = ""
@@ -124,5 +138,10 @@ class EditStudentViewController: UIViewController {
         }
         
     }
+    // при нажатии на кнопку Отмена
+    @IBAction func cancelEdit(_ sender: Any) {
+        
+    }
+    
     
 }
