@@ -10,20 +10,24 @@ import UIKit
 
 class StudentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    
     @IBOutlet weak var tableView: UITableView!
     
     // идентификатор ячейки таблицы
     let cellReuseIdentifier = "cell"
     
-    // инициализируем массив из экземляров класса Student
+    // инициализируем массив из экземляров класса Student - основная модель данных
     var allData = [Student]()
     
     var student: Student = Student(name: "", soname: "", score: "")
     
+    var isEdit: Bool = false
+    // номер ячейки таблицы
+    var row: Int = 0
+    
+    // MARK: - Работа с tableView
     //задаем заголовок таблицы
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Список студентов               Средний балл"
+        return "Список студентов                      Средний балл"
     }
     
     //задаем кол-во строк в таблице вычисляя кол-во элементов в массиве allData
@@ -43,9 +47,8 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
         //уставналиваем AccessoryType
         cell!.accessoryType = UITableViewCell.AccessoryType(rawValue: 1)!
         
-        // заполняем поля ячейки таблицы данными из массива студенов
+        // заполняем поля ячейки таблицы данными из массива студентов
         let fullName = self.allData[indexPath.row].fullName
-        
         let score = self.allData[indexPath.row].score
         
         cell!.textLabel?.text = "\(fullName!)"
@@ -57,7 +60,7 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     // метод вызываемый по нажатию на ячейку таблицы UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Нажата ячейка номер: \(indexPath.row)")
+        print("Нажата ячейка c индексом: \(indexPath.row)")
         
         // заполняем из модели данных поля соответствующие нажатой ячейке с номером indexPath.row
         student.name = self.allData[indexPath.row].name
@@ -67,13 +70,15 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
         //View в который нужен переход EditStudentViewController с идентификатором
         let destinationVC = storyboard?.instantiateViewController(withIdentifier: "EditStudentViewController") as! EditStudentViewController
         
-          // заполняем соответствующие поля в EditViewController полями
-            
+        // заполняем соответствующие поля в EditViewController полями
             destinationVC.student.name = student.name
             destinationVC.student.soname = student.soname
             destinationVC.student.score = student.score
         
-        // ну и сам переход во view собственно
+        self.isEdit = true
+        self.row = indexPath.row
+        
+        // ну и сам переход в EditStudentView собственно
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
     
@@ -88,30 +93,35 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
         if editingStyle == .delete {
             
             // удаление сущности из модели данных
-            allData.remove(at: indexPath.row)
+            self.allData.remove(at: indexPath.row)
             
             // удаление строки таблицы из таблицы
             tableView.deleteRows(at: [indexPath], with: .fade)
             
-        } else if editingStyle == .insert {
-            // Not used in our example, but if you were adding a new row, this is where you would do it.
         }
+        
+        // на будущее
+        //if editingStyle == .insert {
+        //    self.allData.insert(Student(name: "edit",
+        //                                soname: "edit",
+        //                                score: "5.0"), at: indexPath.row)
+        //}
         
     }
     
+    // MARK: - Жизненный цикл
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // регистрируем xib файл с дизайном ячейки таблицы
-        let xib = UINib(nibName: "xibCell", bundle: Bundle.main)
-        tableView?.register(xib, forCellReuseIdentifier: "xibCell")
+        //let xib = UINib(nibName: "xibCell", bundle: Bundle.main)
+        //tableView?.register(xib, forCellReuseIdentifier: "xibCell")
         
         // регистрируем идентификатор ячейки CellReuseIdentifier
-        tableView.register(StudentsTableViewCell.self, forCellReuseIdentifier: "xibCell")
+        //tableView.register(StudentsTableViewCell.self, forCellReuseIdentifier: "xibCell")
         
         tableView.delegate = self
         tableView.dataSource = self
-        
         
         // функция чтения данных из students.plist
         func readPlist(){
@@ -134,7 +144,6 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
             for student in allData {
                 print("Student: \(student.fullName!) score: \(student.score!)")
             }
-            
         }
         
         // читаем данные из students.plist
@@ -142,35 +151,35 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    /*
-    // будем заполнять студента только тогда когда мы переходим от ячейки таблицы
-    
-    func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
-        //if segue!.identifier == "fromCellToEditStudent" {
-            let destinationVC: EditStudentViewController = segue!.destination as! EditStudentViewController
-            
-            destinationVC.student.name = (student.name)
-            destinationVC.student.soname = (student.soname)
-            destinationVC.student.score = (student.score)
-            
-        }
-    */
-    
-    // передаем данные из этого View в главный контроллер StudentsViewController
-    // и добавляем в массив нового студента Student
-    //override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //получаем View Controller, который является конечным пунктом для segue
-      //  let destinationVC = segue.destination as! EditStudentViewController
-        
-        //destinationVC.student.name = student.name
-        //destinationVC.student.soname = student.soname
-        //destinationVC.student.score = student.score
-        
-   // }
-    
+    // при каждом появлении StudentsViewController
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // тут будет код который исполняется при возобновлении показа главной view
+        if self.isEdit == true {
+            // добавляем новую запись студента
+        //self.allData.insert(Student(name: student.name,
+        //                               soname: student.soname,
+        //                               score: student.score), at: row)
+        
+        self.allData.append(Student(name: student.name,
+                                    soname: student.soname,
+                                    score: student.score))
+           // удаляем старую
+        self.allData.remove(at: row)
+        
+        // добавляем новую ячейку таблицы
+        tableView.beginUpdates()
+        tableView.deleteRows(at: [IndexPath(row: row, section: 0)], with: .automatic)
+            
+        tableView.insertRows(at: [IndexPath(row: allData.count-1, section: 0)], with: .automatic)
+        tableView.endUpdates()
+    
+        self.isEdit = false
+        }
     }
+    
+    //func addNewStudent (name: String, soname: String, score: String) {
+        //self.allData.append(Student(name, soname, score)
+    //}
     
 }

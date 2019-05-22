@@ -16,9 +16,11 @@ class EditStudentViewController: UIViewController {
 
     var student: Student = Student(name: "", soname: "", score: "")
     
+    // MARK: - [Жизненный цикл]
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    // берем из student все поля и вписываем их в соотв аутлеты
         self.textName!.text = student.name
         self.textSoname!.text = student.soname
         self.textScore!.text = student.score
@@ -28,12 +30,9 @@ class EditStudentViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-       // self.textName!.text = student.name
-      //  self.textSoname!.text = student.soname
-      //  self.textScore!.text = student.score
-        
     }
     
+    // MARK: - Алерты и валидация
     // метод для вывода алертов в процессе валидации полей
     func showAlert(title: String, message: String) {
         // создаем объект типа UIAlertController, описывающий модальное окно
@@ -100,48 +99,36 @@ class EditStudentViewController: UIViewController {
         }
     }
     
-    // передаем данные из этого View в главный контроллер StudentsViewController
-    // и добавляем в массив нового студента Student
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // получаем View Controller, который является конечным пунктом для segue
-        if let destinationVC = segue.destination as? StudentsViewController {
-        // добавляем в массив нового студента Students массив находится в главном view контроллере StudentsViewController
-        destinationVC.allData.append(Student(name: textName.text!,
-                                             soname: textSoname.text!,
-                                             score: textScore.text!))
-        }
-    }
-    
-    // new sega
-    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
-    {
-        if segue.identifier == "DataToMain"
-        {
-            let detailViewController = ((segue.destination) as! StudentsViewController)
-            
-            detailViewController.allData.append(Student(name: textName.text!,
-                                                        soname: textSoname.text!,
-                                                        score: textScore.text!))
-        }
-    }
-    
+    // MARK: - Экшены на кнопки
     // при нажатии на кнопку Сохранить будет происходить валидация полей
     // передача заполненных полей в главный View
     // а также переход обратно на главный экран с таблицей студентов
     @IBAction func saveStudent(_ sender: Any) {
-
         // если валидация проша успешно значение функции validation -> true
-        // то переходим в главный RootViewController
+        // то
         if validation() {
+            //View в который нужен переход EditStudentViewController с идентификатором
+            let destinationVC = storyboard?.instantiateViewController(withIdentifier: "MainController") as! StudentsViewController
             
-            //prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+            destinationVC.student.name = textName.text
+            destinationVC.student.soname = textSoname.text
+            destinationVC.student.score = textScore.text
+            
+            destinationVC.self.isEdit = true
+            
+            self.navigationController?.popToRootViewController(animated: true)
+            //self.navigationController?.popViewController(destinationVC, animated: true)
+            
         }
-        
-    }
-    // при нажатии на кнопку Отмена
-    @IBAction func cancelEdit(_ sender: Any) {
-        
     }
     
+    // при нажатии на кнопку Отмена
+    @IBAction func cancelEdit(_ sender: Any) {
+        //let destinationVC = storyboard?.instantiateViewController(withIdentifier: "MainController") as! StudentsViewController
+        
+        //destinationVC.isEdit = false
+        
+        //self.navigationController?.popToRootViewController(animated: true)
+    }
     
 }

@@ -18,43 +18,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="База Данных студентов" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISq-xM-1YZ">
-                                <rect key="frame" x="30" y="120" width="315" height="29"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  HomeBrewDev Егор Девятов (с) 2019 г." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SB-8r-lqc">
-                                <rect key="frame" x="30" y="607.5" width="315" height="19.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="students1" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="seb-mV-zvd">
-                                <rect key="frame" x="47.5" y="259" width="280" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="GDV-Xg-HA5"/>
-                                    <constraint firstAttribute="width" constant="280" id="ytq-Lp-xiM"/>
-                                </constraints>
-                            </imageView>
+                            <stackView opaque="NO" contentMode="center" axis="vertical" distribution="fillProportionally" alignment="center" spacing="169" translatesAutoresizingMaskIntoConstraints="NO" id="2oJ-fm-d6A">
+                                <rect key="frame" x="20" y="40" width="335" height="587"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="База Данных студентов" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISq-xM-1YZ">
+                                        <rect key="frame" x="49" y="0.0" width="237.5" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DYW-cL-tKh">
+                                        <rect key="frame" x="37" y="201" width="261.5" height="386"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="students1" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="seb-mV-zvd">
+                                                <rect key="frame" x="0.0" y="0.0" width="261.5" height="270"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HomeBrewDev Егор Девятов (с) 2019 г." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SB-8r-lqc" userLabel="HomeBrewDev Егор Девятов (с) 2019 г.">
+                                                <rect key="frame" x="0.0" y="270" width="261.5" height="116"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="116" id="pdq-3b-BRl"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="6SB-8r-lqc" firstAttribute="top" secondItem="DYW-cL-tKh" secondAttribute="top" constant="270" id="bkw-ey-knr"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ISq-xM-1YZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="FNB-RT-hcD"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ISq-xM-1YZ" secondAttribute="trailing" constant="30" id="IPF-yc-jPy"/>
-                            <constraint firstItem="ISq-xM-1YZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="NlP-fx-mhs"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6SB-8r-lqc" secondAttribute="bottom" constant="40" id="Ttr-Bf-35c"/>
-                            <constraint firstItem="seb-mV-zvd" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="VwG-QI-E03"/>
-                            <constraint firstItem="6SB-8r-lqc" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bFb-7Y-yNl"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6SB-8r-lqc" secondAttribute="trailing" constant="30" id="klN-Zs-Vdf"/>
-                            <constraint firstItem="seb-mV-zvd" firstAttribute="top" secondItem="ISq-xM-1YZ" secondAttribute="bottom" constant="110" id="lK5-oi-MrO"/>
+                            <constraint firstItem="2oJ-fm-d6A" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="8Sr-vW-vYw"/>
+                            <constraint firstItem="2oJ-fm-d6A" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="B56-md-0Yp"/>
+                            <constraint firstItem="2oJ-fm-d6A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="FnO-df-uyr"/>
+                            <constraint firstItem="2oJ-fm-d6A" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="L1w-ON-HwS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
     <resources>
