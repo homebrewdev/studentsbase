@@ -110,15 +110,17 @@ class EditStudentViewController: UIViewController {
             //View в который нужен переход EditStudentViewController с идентификатором
             let destinationVC = storyboard?.instantiateViewController(withIdentifier: "MainController") as! StudentsViewController
             
-            destinationVC.student.name = textName.text
-            destinationVC.student.soname = textSoname.text
-            destinationVC.student.score = textScore.text
+            student.name = textName.text
+            student.soname = textSoname.text
+            student.score = textScore.text
+            
+            destinationVC.self.allData.append(Student(name: student.name,
+                                                      soname: student.soname,
+                                                      score: student.score))
             
             destinationVC.self.isEdit = true
             
             self.navigationController?.popToRootViewController(animated: true)
-            //self.navigationController?.popViewController(destinationVC, animated: true)
-            
         }
     }
     
