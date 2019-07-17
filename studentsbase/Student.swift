@@ -15,16 +15,14 @@ import Foundation
 //      fullName    - автополе Фамилия + пробел + имя
 //      score       - средний балл
 class Student {
-    var name: String!
-    var soname: String!
-    var fullName: String!
-    var score: String!
+    var name: String
+    var soname: String
+    var fullName: String
+    var score: String
     
 // конструктор
-    convenience init(name: String, soname: String, score: String)
+    init(name: String, soname: String, score: String)
     {
-        self.init()
-        
         self.name       = name
         self.soname     = soname
         self.fullName   = soname + " " + name

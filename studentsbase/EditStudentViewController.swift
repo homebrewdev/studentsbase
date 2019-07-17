@@ -110,9 +110,9 @@ class EditStudentViewController: UIViewController {
             //View в который нужен переход EditStudentViewController с идентификатором
             let destinationVC = storyboard?.instantiateViewController(withIdentifier: "MainController") as! StudentsViewController
             
-            student.name = textName.text
-            student.soname = textSoname.text
-            student.score = textScore.text
+            student.name = textName.text ?? ""
+            student.soname = textSoname.text ?? ""
+            student.score = textScore.text ?? ""
             
             destinationVC.self.allData.append(Student(name: student.name,
                                                       soname: student.soname,

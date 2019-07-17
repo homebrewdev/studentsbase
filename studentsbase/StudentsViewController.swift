@@ -27,7 +27,7 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - Работа с tableView
     //задаем заголовок таблицы
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Список студентов                      Средний балл"
+        return "Список студентов                 Средний балл"
     }
     
     //задаем кол-во строк в таблице вычисляя кол-во элементов в массиве allData
@@ -45,14 +45,14 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
             cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: reuseIdentifier)
         }
         //уставналиваем AccessoryType
-        cell!.accessoryType = UITableViewCell.AccessoryType(rawValue: 1)!
+        //cell!.accessoryType = UITableViewCell.AccessoryType(rawValue: 1)!
         
         // заполняем поля ячейки таблицы данными из массива студентов
         let fullName = self.allData[indexPath.row].fullName
         let score = self.allData[indexPath.row].score
         
-        cell!.textLabel?.text = "\(fullName!)"
-        cell!.detailTextLabel?.text = "\(score ?? "0.0")"
+        cell!.textLabel?.text = "\(fullName)"
+        cell!.detailTextLabel?.text = "\(score)"
         
         return cell!
     }
@@ -142,7 +142,7 @@ class StudentsViewController: UIViewController, UITableViewDelegate, UITableView
             
             //выводим для себя в консоль
             for student in allData {
-                print("Student: \(student.fullName!) score: \(student.score!)")
+                print("Student: \(student.fullName) score: \(student.score)")
             }
         }
         
